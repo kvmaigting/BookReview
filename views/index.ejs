@@ -1,0 +1,39 @@
+<%- include('partials/header.ejs'); -%>
+
+<div class="container">
+    <h1>My Reviews</h1>
+    <a id="newReviewBtn" href="/new">New Review</a>
+    <ul id="postsList">
+      <% listReview.forEach(review=> { %>
+        <li>
+          <img src="<%=review.cover_url %>" width="100" height="100"/>
+          <h2>
+            <%=review.book_title%> by <%=review.author_name %>
+          </h2>
+          <small>
+            Date read: <%= review.read_date %>
+          </small>
+
+          <h4>
+             My rate: <%= review.rating %>/10
+          </h4>
+          <p>
+            <%= review.review %>
+          </p>
+          
+          <a class="edit" href="/edit/<%= review.id %>">Edit</a>
+          <form method="post" action="/delete/<%= review.id %>">
+            <button class="delete" type="submit">
+              Delete
+            </button>
+          </form>
+          
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+
+
+
+
+<%- include('partials/footer.ejs'); -%>

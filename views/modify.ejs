@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Blog</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      <%= heading %>
+    </h1>
+
+    <% if (locals.editReview) { %>
+      <form id="editForm" method="post" action="/edit/<%=editReview.id%>">
+        <h4>Book Cover</h4>
+          <img name="cover" src="<%= editReview.cover_url %>">
+          <input type="hidden" name="coverURL" placeholder="URL" value="<%= editReview.cover_url %>" required readonly>
+          <h4>Title:</h4>
+          <input type="text" name="title" placeholder="Title" value="<%= editReview.book_title %>" required readonly>
+          <h4>Author:</h4>
+          <input type="text" name="author" placeholder="Author" value="<%= editReview.author_name %>" required readonly>
+          <h4>Date Read:</h4>
+          <input type="date" name="readDate" value = "<%= date %>" required>
+          <h4>Rating</h4>
+          <input type="number" name="rating" placeholder="Rate 0-10" min="0" max="10" value="<%= editReview.rating %>" required>
+          <h4>Book Review</h4>
+          <textarea name="review" placeholder="Book Review" required rows="10" ><%= editReview.review %></textarea>
+          <button class="full-width" type="submit">
+            <%= submit %>
+          </button>
+      </form>
+      <% } else {%>
+        <form id="newPostForm" method="post" action="/reviews">
+          <h4>Book Cover</h4>
+          <img name="cover" src="<%= url %>">
+          <input type="hidden" name="coverURL" placeholder="URL" value="<%= url %>" required readonly>
+          <h4>Title:</h4>
+          <input type="text" name="title" placeholder="Title" value="<%= title %>" required readonly>
+          <h4>Author:</h4>
+          <input type="text" name="author" placeholder="Author" value="<%= author[0] %>" required readonly>
+          <h4>Date Read:</h4>
+          <input type="date" name="readDate" required>
+          <h4>Rating</h4>
+          <input type="number" name="rating" placeholder="Rate 0-10" min="0" max="10" required>
+          <h4>Book Review</h4>
+          <textarea name="review" placeholder="Book Review" required rows="10"></textarea>
+          <button class="full-width" type="submit">
+            <%= submit %>
+          </button>
+          
+        </form>
+        <% } %>
+
+  </div>
+</body>
+
+</html>
